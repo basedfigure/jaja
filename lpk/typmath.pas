@@ -35,6 +35,13 @@ type
   end;
   face_a = array of face_t;
 
+  { mat4_t }
+
+  mat4_t = packed object
+    sx,sy,sz,ux,uy,uz,fx,fy,fz,tx,ty,tz,px,py,pz,w: double;
+    procedure identity;
+  end;
+
   function xyz(ax, ay, az: double): xyz_t;
 implementation
 
@@ -45,6 +52,14 @@ begin
     y:=ay;
     z:=az;
   end;
+end;
+
+{ mat4_t }
+
+procedure mat4_t.identity;
+begin
+  sx:=1; sy:=0; sz:=0; ux:=0; uy:=1; uz:=0; fx:=0; fy:=0; fz:=1;
+  tx:=0; ty:=0; tz:=0; px:=0; py:=0; pz:=0; w:=1;
 end;
 
 end.

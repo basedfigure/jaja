@@ -30,7 +30,9 @@ var
   m: mod_t;
 begin
   // Original, export script for Blender at: http://runtimeterror.com/tech/jtf/
-  // Mem links to Blender versions, OBJ to JTF converter
+  // Blender compatibles at: io/link.txt
+
+  // Mem OBJ to JTF converter
   SetLength(result, lpath.Count);
 
   for i:=0 to lpath.Count-1 do begin
