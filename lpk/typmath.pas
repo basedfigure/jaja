@@ -19,6 +19,8 @@ type
 
   xyz_t = packed object
     x,y,z: double;
+    procedure add (const v: xyz_t);
+    procedure sub (const v: xyz_t);
   end;
 
   { vert_t }
@@ -38,20 +40,36 @@ type
   { mat4_t }
 
   mat4_t = packed object
-    sx,sy,sz,ux,uy,uz,fx,fy,fz,tx,ty,tz,px,py,pz,w: double;
+    {axes}sx,sy,sz,ux,uy,uz,fx,fy,fz,{trans - proj}tx,ty,tz,px,py,pz,w: double;
     procedure identity;
   end;
 
-  function xyz(ax, ay, az: double): xyz_t;
+  function xyz (ax, ay, az: double): xyz_t;
 implementation
 
-function xyz(ax, ay, az: double): xyz_t;
+function xyz (ax, ay, az: double): xyz_t;
 begin
   with result do begin
     x:=ax;
     y:=ay;
     z:=az;
   end;
+end;
+
+{ xyz_t }
+
+procedure xyz_t.add (const v: xyz_t);
+begin
+  x:=x + v.x;
+  y:=y + v.y;
+  z:=z + v.z;
+end;
+
+procedure xyz_t.sub (const v: xyz_t);
+begin
+  x:=x - v.x;
+  y:=y - v.y;
+  z:=z - v.z;
 end;
 
 { mat4_t }
