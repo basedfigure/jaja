@@ -8,7 +8,7 @@ unit sojo;
 interface
 
 uses
-  fmtmod, LazarusPackageIntf;
+  fmtmod, gl1draw, typmath, LazarusPackageIntf;
 
 implementation
 

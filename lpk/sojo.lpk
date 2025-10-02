@@ -6,13 +6,21 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
       <Item>
         <Filename Value="fmtmod.pas"/>
         <UnitName Value="fmtmod"/>
+      </Item>
+      <Item>
+        <Filename Value="gl1draw.pas"/>
+        <UnitName Value="gl1draw"/>
+      </Item>
+      <Item>
+        <Filename Value="typmath.pas"/>
+        <UnitName Value="typmath"/>
       </Item>
     </Files>
     <RequiredPkgs>

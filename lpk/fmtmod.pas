@@ -7,18 +7,13 @@ interface
 uses
   Classes, SysUtils, Dialogs,
   // Shut:
-  typutil;
+  typutil,
+  // Sojo:
+  typmath;
 
 type
-  vert_t = record
-    x,y,z,nx,ny,nz,u,v: single;
-    // Don't add fields here lest it breaks JTF mapping.
-  end;
 
-  face_t = record
-    a,b,c: vert_t;
-  end;
-  face_a = array of face_t;
+  { mod_t }
 
   mod_t = record
     fa: face_a;
