@@ -21,13 +21,15 @@ type
     x,y,z: double;
     procedure add (const v: xyz_t);
     procedure sub (const v: xyz_t);
+    procedure mul (const v: xyz_t);
+    procedure sca (s: single);
   end;
 
   { vert_t }
 
   vert_t = record
     x,y,z,nx,ny,nz,u,v: single;
-    // Don't add fields here lest it breaks JTF mapping.
+    // Don't add fields here, lest it breaks JTF mapping.
   end;
 
   { face_t }
@@ -72,12 +74,26 @@ begin
   z:=z - v.z;
 end;
 
+procedure xyz_t.mul (const v: xyz_t);
+begin
+  x:=x * v.x;
+  y:=y * v.y;
+  z:=z * v.z;
+end;
+
+procedure xyz_t.sca (s: single);
+begin
+  x:=x * s;
+  y:=y * s;
+  z:=z * s;
+end;
+
 { mat4_t }
 
 procedure mat4_t.identity;
 begin
-  sx:=1; sy:=0; sz:=0; ux:=0; uy:=1; uz:=0; fx:=0; fy:=0; fz:=1;
-  tx:=0; ty:=0; tz:=0; px:=0; py:=0; pz:=0; w:=1;
+  { axes } sx:=1; sy:=0; sz:=0; ux:=0; uy:=1; uz:=0; fx:=0; fy:=0; fz:=1;
+  { trans - proj } tx:=0; ty:=0; tz:=0; px:=0; py:=0; pz:=0; w:=1;
 end;
 
 end.
