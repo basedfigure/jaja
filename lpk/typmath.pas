@@ -19,10 +19,15 @@ type
 
   xyz_t = packed object
     x,y,z: double;
-    procedure add (const v: xyz_t);
-    procedure sub (const v: xyz_t);
-    procedure mul (const v: xyz_t);
-    procedure sca (s: single);
+    { Proc }
+    procedure add   (const v: xyz_t);
+    procedure sub   (const v: xyz_t);
+    procedure mul   (const v: xyz_t);
+    procedure sca   (s: single);
+    procedure norm;
+    procedure cross (const v: xyz_t);
+    { Func }
+    function dot    (const v: xyz_t): single;
   end;
 
   { vert_t }
@@ -86,6 +91,35 @@ begin
   x:=x * s;
   y:=y * s;
   z:=z * s;
+end;
+
+procedure xyz_t.norm;
+var
+  l: double;
+begin
+  l:=Sqrt(x * x + y * y + z * z);
+  if l <> 0 then begin
+    x:=x / l;
+    y:=y / l;
+    z:=z / l;
+  end;
+end;
+
+procedure xyz_t.cross (const v: xyz_t);
+var
+  t: xyz_t;
+begin
+  t.x:=y * v.z - z * v.y;
+  t.y:=z * v.x - x * v.z;
+  t.z:=x * v.y - y * v.x;
+    x:=t.x;
+    y:=t.y;
+    z:=t.z;
+end;
+
+function xyz_t.dot (const v: xyz_t): single;
+begin
+  result:=x * v.x + y * v.y + z * v.z;
 end;
 
 { mat4_t }
