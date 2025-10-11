@@ -51,9 +51,12 @@ type
 
   m16_t = packed object
     {axes}sx,sy,sz,ux,uy,uz,fx,fy,fz,{trans - proj}tx,ty,tz,px,py,pz,w: double;
+    { Proc }
     procedure id;
     procedure look(const at, pos, up: xyz_t);
     procedure pers(fov, asp, z1, z2: single);
+    { Func }
+    function col: m16_a;
   end;
 
   function xyz (ax, ay, az: double): xyz_t;
@@ -135,7 +138,7 @@ begin
   { trans - proj } tx:=0; ty:=0; tz:=0; px:=0; py:=0; pz:=0; w:=1;
 end;
 
-procedure m16_t.look(const at, pos, up: xyz_t);
+procedure m16_t.look (const at,pos,up: xyz_t);
 var
   f, s, u: xyz_t;
 begin
@@ -171,7 +174,7 @@ begin
   w :=1;
 end;
 
-procedure m16_t.pers(fov, asp, z1, z2: single);
+procedure m16_t.pers (fov,asp,z1,z2: single);
 var
   f: single;
 begin
@@ -183,6 +186,17 @@ begin
   tz:=(2 * z1 * z2) / (z1 - z2);
   pz:=-1;
   w:=0;
+end;
+
+function m16_t.col: m16_a;
+{ OpenGL column major matrix converter }
+var
+  a: m16_a;
+begin
+  a[0 ] :=sx; a[1 ] :=ux; a[2 ] :=fx; a[3 ] :=px; a[4 ] :=sy; a[5 ] :=uy;
+  a[6 ] :=fy; a[7 ] :=py; a[8 ] :=sz; a[9 ] :=uz; a[10] :=fz; a[11] :=pz;
+  a[12] :=tx; a[13] :=ty; a[14] :=tz; a[15] :=w;
+  result:=a;
 end;
 
 end.
