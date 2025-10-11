@@ -5,7 +5,8 @@ unit typmath;
 interface
 
 uses
-  Classes, SysUtils;
+  // Nativ:
+  Classes, SysUtils, Math;
 
 type
 
@@ -44,11 +45,15 @@ type
   end;
   face_a = array of face_t;
 
-  { mat4_t }
+  { m16_t }
 
-  mat4_t = packed object
+  m16_a = array[0..15]of single; // TODO: double, directives
+
+  m16_t = packed object
     {axes}sx,sy,sz,ux,uy,uz,fx,fy,fz,{trans - proj}tx,ty,tz,px,py,pz,w: double;
-    procedure identity;
+    procedure id;
+    procedure look(const at, pos, up: xyz_t);
+    procedure pers(fov, asp, z1, z2: single);
   end;
 
   function xyz (ax, ay, az: double): xyz_t;
@@ -122,12 +127,62 @@ begin
   result:=x * v.x + y * v.y + z * v.z;
 end;
 
-{ mat4_t }
+{ m16_t }
 
-procedure mat4_t.identity;
+procedure m16_t.id;
 begin
   { axes } sx:=1; sy:=0; sz:=0; ux:=0; uy:=1; uz:=0; fx:=0; fy:=0; fz:=1;
   { trans - proj } tx:=0; ty:=0; tz:=0; px:=0; py:=0; pz:=0; w:=1;
+end;
+
+procedure m16_t.look(const at, pos, up: xyz_t);
+var
+  f, s, u: xyz_t;
+begin
+  f:=at;
+  f.norm;
+
+  s:=f;
+  s.cross(up);
+  s.norm;
+
+  u:=s;
+  u.cross(f);
+
+  sx:=s.x;
+  sy:=s.y;
+  sz:=s.z;
+  tx:=-s.dot(pos);
+
+  ux:= u.x;
+  uy:= u.y;
+  uz:= u.z;
+  ty:=-u.dot(pos);
+
+  fx:=-f.x;
+  fy:=-f.y;
+  fz:=-f.z;
+  tz:=f.dot(pos);
+
+  px:=0;
+  py:=0;
+  pz:=0;
+
+  w :=1;
+end;
+
+procedure m16_t.pers(fov, asp, z1, z2: single);
+var
+  f: single;
+begin
+  id;
+  f:=1.0 / Tan(fov * 0.5 * PI/180);
+  sx:=f / asp;
+  uy:=f;
+  fz:=(z1 + z2) / (z1 - z2);
+  tz:=(2 * z1 * z2) / (z1 - z2);
+  pz:=-1;
+  w:=0;
 end;
 
 end.
