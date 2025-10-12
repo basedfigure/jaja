@@ -140,7 +140,7 @@ end;
 
 procedure m16_t.look (const at,pos,up: xyz_t);
 var
-  f, s, u: xyz_t;
+  f,s,u: xyz_t;
 begin
   f:=at;
   f.norm;

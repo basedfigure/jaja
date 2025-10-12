@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <Package Version="5">
-    <Name Value="sojo"/>
+    <Name Value="jaja"/>
     <Type Value="RunAndDesignTime"/>
     <CompilerOptions>
       <Version Value="11"/>
@@ -25,10 +25,10 @@
     </Files>
     <RequiredPkgs>
       <Item>
-        <PackageName Value="LCLBase"/>
+        <PackageName Value="juju"/>
       </Item>
       <Item>
-        <PackageName Value="shut"/>
+        <PackageName Value="LCLBase"/>
       </Item>
       <Item>
         <PackageName Value="FCL"/>

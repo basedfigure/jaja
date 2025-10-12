@@ -6,9 +6,9 @@ interface
 
 uses
   Classes, SysUtils, Dialogs,
-  // Shut:
+  // Juju:
   typutil,
-  // Sojo:
+  // Jaja:
   typmath;
 
 type

@@ -6,9 +6,9 @@ interface
 
 uses
   Classes, SysUtils, gl,
-  // Shut:
+  // Juju:
   typutil,
-  // Sojo:
+  // Jaja:
   typmath, fmtmod;
 
   procedure gl1_draw_tris(const fa: face_a);
