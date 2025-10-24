@@ -6,6 +6,7 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
+        <IncludeFiles Value="../../juju/lpk"/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -22,8 +23,19 @@
         <Filename Value="typmath.pas"/>
         <UnitName Value="typmath"/>
       </Item>
+      <Item>
+        <Filename Value="../../juju/lpk/juju.lpk"/>
+        <Type Value="Text"/>
+      </Item>
+      <Item>
+        <Filename Value="fmt2d.pas"/>
+        <UnitName Value="fmt2d"/>
+      </Item>
     </Files>
     <RequiredPkgs>
+      <Item>
+        <PackageName Value="LazOpenGLContext"/>
+      </Item>
       <Item>
         <PackageName Value="juju"/>
       </Item>

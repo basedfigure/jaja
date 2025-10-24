@@ -8,7 +8,7 @@ unit jaja;
 interface
 
 uses
-  fmtmod, gl1draw, typmath, LazarusPackageIntf;
+  fmtmod, gl1draw, typmath, fmt2d, LazarusPackageIntf;
 
 implementation
 
